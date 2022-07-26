@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { ethers } from "ethers";
-import { create as ipfsHttpClient } from "ipfs-http-client";
 import { useRouter } from "next/router";
 import Web3Modal from "web3modal";
 
 import { Web3Storage } from "web3.storage"; //using web3 Storage for storing NFT Files
 
-const IPFS_URL = ipfsHttpClient(process.env.IPFS_URL);
+//const IPFS_URL = ipfsHttpClient(process.env.IPFS_URL);
 
 import { nftMarketAddress } from "../config";
 import nftMarket from "../artifacts/contracts/NFTMarket.sol/NFTMarketplace.json"; //refrencing abi and artifacts and let ether know how to interact with contract
@@ -21,34 +20,35 @@ export default function CreateItem() {
 
     async function onChange(e) {
         //connect to a different API
-        const file = e.target.files[0];
 
-        // call Core API methods
-        //const { cid } = await client.add("Hello Wordl");
-        console.log(cid);
+        const imageFile = e.target.files[0];
+        const captionInput = document.getElementById("caption-input");
 
-        //console.log("This is file here" + file);
+        const WEB3STORAGE_TOKEN = process.env.WEB3STORAGE_TOKEN;
+        console.log(WEB3STORAGE_TOKEN);
+        const storageClient = new Web3Storage({
+            token: WEB3STORAGE_TOKEN,
+        });
 
-        /*
-        try {
-            const added = await client.add(file, {
-                progress: (prog) => console.log(`received: ${prog}`),
-            });
-            console.log("added value in on Change1" + added);
-            const url = `https://ipfs.infura.io/ipfs/${added.path}`;
-            console.log("added value in on Change" + added);
-            setFileUrl(url);
-            console.log("url in on Change" + url);
-        } catch (error) {
-            console.log("Error uploading file: ", error);
-        }
+        console.log(storageClient);
+        //const cid = await storageClient.put([imageFile]);
 
-*/
+        const fileInput = document.querySelector('input[type="file"]');
+        /*const rootCid = await storageClient.put(fileInput.files, {
+            name: "cat pics",
+            maxRetries: 3,
+        });
+        */
+        const files = [new File(["contents-of-file-1"], "plain-utf8.txt")];
+        const cid = await storageClient.put(files);
+        console.log("stored files with cid:", cid);
     }
+
     async function uploadToIPFS() {
+        /*
         const { name, description, price } = formInput;
         if (!name || !description || !price || !fileUrl) return;
-        /* first, upload to IPFS */
+        
         const data = JSON.stringify({
             name,
             description,
@@ -58,11 +58,12 @@ export default function CreateItem() {
             const added = await client.add(data);
             const url = `https://ipfs.infura.io/ipfs/${added.path}`;
             console.log(url);
-            /* after file is uploaded to IPFS, return the URL to use it in the transaction */
+           
             return url;
         } catch (error) {
             console.log("Error uploading file: ", error);
         }
+        */
     }
 
     async function listNFTForSale() {
