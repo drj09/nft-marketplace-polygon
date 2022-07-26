@@ -20,14 +20,8 @@ export default function CreateItem() {
     const router = useRouter();
 
     async function onChange(e) {
-        // connect to a different API
-        //const file = e.target.files[0];
-        console.log("Hello" + IPFS_URL);
-        const client = ipfsHttpClient({
-            url: IPFS_URL,
-        });
-
-        const { cid } = await client.add("Hello world!");
+        //connect to a different API
+        const file = e.target.files[0];
 
         // call Core API methods
         //const { cid } = await client.add("Hello Wordl");
