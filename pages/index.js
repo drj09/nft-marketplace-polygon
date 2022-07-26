@@ -3,9 +3,9 @@ import axios from "axios"; //axios is for data fetching and http requests
 import { useEffect, useState } from "react";
 import web3modal from "web3modal"; //library to connect to etherium wallets
 
-import { nftAddress, nftMarketAddress } from "../config";
+import { nftMarketAddress } from "../config";
 
-import Market from "../artifacts/contracts/NFTMarket.sol/NFTMarketplace.json"; //refrencing abi and artifacts AND LET ETHER TI KNOW HOW OT INTERACT WIRH THE  CINTRACT
+import nftMarket from "../artifacts/contracts/NFTMarket.sol/NFTMarketplace.json"; //refrencing abi and artifacts AND LET ETHER TI KNOW HOW OT INTERACT WIRH THE  CINTRACT
 
 export default function Home() {
     const [nfts, setNfts] = useState([]); //to update local state when we get list of nft for this user
@@ -17,9 +17,8 @@ export default function Home() {
     async function loadNFTs() {
         const provider = new ethers.providers.JsonRpcProvider();
         const marketContract = new ethers.Contract(
-            nftaddress,
-            NFT,
-            abi,
+            nftMarketAddress,
+            nftMarket.abi,
             provider
         );
 
