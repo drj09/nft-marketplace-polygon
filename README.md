@@ -1,13 +1,6 @@
-# Sample Hardhat Project
+# DRJ NFT MarketPlace
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a script that deploys that contract.
+```
 
-Try running some of the following tasks:
-
-```shell
-npx hardhat help
-npx hardhat test
-GAS_REPORT=true npx hardhat test
-npx hardhat node
-npx hardhat run scripts/deploy.js
+-   Built an NFT Market-Place to get understand how blockchain and Web3 work. Learned about the Client-side application and interaction of frontend to Smart Contract. Developed a smart contract inheriting ERC721 implemented by using OpenZepplin. Used NextJs, EthersJs, Web3Modal to create a UI experience, interacting with smart contract and using metmask for userIdentity. Created a deployment script to automate deployment project locally using hardhat as Ethereum development environment.
 ```
